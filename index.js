@@ -116,6 +116,7 @@ javascript: (async () => {
             };
         });
 
+
         return {
             header: { username, picks: totalPicks, yield: totalYield, profit: totalProfit },
             paid: { categories, pick_types, stakes, hour_of_the_day, hours_to_event, archive: archiveAlltime },
@@ -133,16 +134,18 @@ javascript: (async () => {
   #ta-close{background:none;border:none;color:#7b8199;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:6px;}
   #ta-close:hover{background:#2a2d3a;color:#fff;}
   #ta-body{overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px;}
-  .ta-scores{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-  .ta-score-card{background:#161922;border:1px solid #2a2d3a;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;}
-  .ta-sc-label{font-size:11px;color:#7b8199;text-transform:uppercase;letter-spacing:.5px;}
-  .ta-sc-value{font-size:26px;font-weight:800;}
-  .ta-sc-desc{font-size:11px;color:#9ca3b8;line-height:1.4;}
+  .ta-scores{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .ta-score-card{background:#161922;border:1px solid #2a2d3a;border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:3px;}
+  .ta-sc-header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;}
+  .ta-sc-label{font-size:10px;color:#7b8199;text-transform:uppercase;letter-spacing:.5px;}
+  .ta-sc-value{font-size:18px;font-weight:800;}
+  .ta-sc-desc{font-size:10px;color:#9ca3b8;line-height:1.3;}
+
   .score-green{color:#22c55e;}.score-yellow{color:#eab308;}.score-orange{color:#f97316;}.score-red{color:#ef4444;}
   .ta-bar-wrap{background:#1e2130;border-radius:4px;height:6px;width:100%;overflow:hidden;}
   .ta-bar{height:100%;border-radius:4px;}
   .ta-section{background:#161922;border:1px solid #2a2d3a;border-radius:10px;padding:14px 16px;}
-  .ta-section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#7b8199;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .ta-section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#7b8199;display:flex;align-items:center;gap:6px;}
   .ta-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid #1e2130;font-size:12px;}
   .ta-row:last-child{border-bottom:none;}
   .ta-rl{color:#9ca3b8;}.ta-rv{font-weight:600;color:#e8eaf0;}
@@ -158,13 +161,33 @@ javascript: (async () => {
   .ta-cat.star{border-left:3px solid #22c55e;}.ta-cat.watch{border-left:3px solid #eab308;}.ta-cat.lock{border-left:3px solid #ef4444;}
   .ta-follow{border-radius:10px;padding:16px;text-align:center;}
   .ta-follow.yes{background:#0d1f12;border:2px solid #22c55e;}.ta-follow.no{background:#1f0d0d;border:2px solid #ef4444;}.ta-follow.maybe{background:#1a1a0d;border:2px solid #eab308;}
-  .ta-f-emoji{font-size:28px;margin-bottom:4px;}
+  .ta-f-emoji{font-size:14px;margin-bottom:4px;}
   .ta-f-title{font-size:15px;font-weight:800;margin-bottom:6px;}
-  .ta-f-reason{font-size:11px;color:#9ca3b8;line-height:1.6;}
+  .ta-f-reason{font-size:11px;color:#9ca3b8;line-height:1.6;display: flex}
   .ta-follow.yes .ta-f-title{color:#22c55e;}.ta-follow.no .ta-f-title{color:#ef4444;}.ta-follow.maybe .ta-f-title{color:#eab308;}
   #ta-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:40px;color:#7b8199;font-size:13px;}
   .ta-spinner{width:32px;height:32px;border:3px solid #2a2d3a;border-top-color:#3b82f6;border-radius:50%;animation:ta-spin .8s linear infinite;}
   @keyframes ta-spin{to{transform:rotate(360deg);}}
+  /* ── PORTFOLIO BUILDER ── */
+  .ta-pf-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+  .ta-pf-stat{background:#1a1f2e;border:1px solid #2a2d3a;border-radius:8px;padding:8px 10px;text-align:center;}
+  .ta-pf-stat-label{font-size:9px;color:#7b8199;text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:2px;}
+  .ta-pf-stat-value{font-size:16px;font-weight:800;}
+  .ta-pf-table{width:100%;border-collapse:collapse;font-size:11px;}
+  .ta-pf-table thead th{color:#7b8199;font-weight:600;text-align:left;padding:4px 6px;border-bottom:1px solid #2a2d3a;font-size:10px;text-transform:uppercase;}
+  .ta-pf-table thead th:not(:first-child){text-align:right;}
+  .ta-pf-table tbody tr{border-bottom:1px solid #1e2130;cursor:pointer;transition:background .1s;}
+  .ta-pf-table tbody tr:hover{background:#1e2130;}
+  .ta-pf-table tbody tr:last-child{border-bottom:none;}
+  .ta-pf-table td{padding:4px 6px;vertical-align:middle;}
+  .ta-pf-table td:not(:first-child){text-align:right;}
+  .ta-pf-check-cell{width:20px;}
+  .ta-pf-check-cell input{accent-color:#3b82f6;cursor:pointer;}
+    /* ── COLLAPSIBLE SECTIONS ── */
+  details.ta-section summary::-webkit-details-marker{display:none;}
+  details.ta-section[open] .ta-collapse-arrow{transform:rotate(180deg);}
+  details.ta-section .ta-collapse-arrow{display:inline-block;transition:transform .2s;}
+
 `;
 
     // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -200,12 +223,14 @@ javascript: (async () => {
     }
     function renderScoreCard(label, score, desc) {
         return `<div class="ta-score-card">
-                    <div class="ta-sc-label">${label}</div>
-                    <div class="ta-sc-value ${scoreColor(score)}">${score}<span style="font-size:14px;color:#7b8199">/100</span></div>
-                    <div class="ta-bar-wrap"><div class="ta-bar" style="width:${score}%;background:${barColor(score)}"></div></div>
-                    <div class="ta-sc-desc">${desc}</div>
-                </div>`;
+        <div class="ta-sc-header">
+            <span class="ta-sc-label">${label}</span>
+            <span class="ta-sc-value ${scoreColor(score)}">${score}<span style="font-size:11px;color:#7b8199;font-weight:400">/100</span></span>
+        </div>
+        <div class="ta-sc-desc">${desc}</div>
+    </div>`;
     }
+
 
     // ─── ANALYZERS ───────────────────────────────────────────────────────────────
     function buildProfitability(td) {
@@ -255,9 +280,32 @@ javascript: (async () => {
         }
 
         const r12 = sorted.slice(-12), r12t = r12.reduce((s, m) => s + m.picks, 0);
+        const r6 = sorted.slice(-6), r6t = r6.reduce((s, m) => s + m.picks, 0);
+        const yield6m = r6t > 0 ? parseFloat((r6.reduce((s, m) => s + m.yield * m.picks, 0) / r6t).toFixed(1)) : null;
         const recentYield = r12t > 0 ? parseFloat((r12.reduce((s, m) => s + m.yield * m.picks, 0) / r12t).toFixed(1)) : null;
 
-        return { sorted, totalMonths, positiveMonths, winRate, neverLost, trend, oddsShift, recentYield };
+        let maxDrawdown = 0, currentDD = 0, ddStreak = 0, maxDDStreak = 0;
+        sorted.forEach(m => {
+            if (m.yield < 0) {
+                currentDD += m.yield;
+                ddStreak++;
+                if (currentDD < maxDrawdown) { maxDrawdown = currentDD; maxDDStreak = ddStreak; }
+            } else {
+                currentDD = 0;
+                ddStreak = 0;
+            }
+        });
+
+        // Overbetting: picks/mes reciente (3m) vs histórico
+        const recentMonths = sorted.slice(-3);
+        const historicMonths = sorted.slice(0, -3);
+        const avgRecent = recentMonths.reduce((s, m) => s + m.picks, 0) / Math.max(recentMonths.length, 1);
+        const avgHistoric = historicMonths.reduce((s, m) => s + m.picks, 0) / Math.max(historicMonths.length, 1);
+        const overbetting = avgHistoric > 10 && avgRecent > avgHistoric * 2
+            ? { detected: true, ratio: parseFloat((avgRecent / avgHistoric).toFixed(1)), recentAvg: Math.round(avgRecent), historicAvg: Math.round(avgHistoric) }
+            : { detected: false, ratio: parseFloat((avgRecent / avgHistoric).toFixed(1)), recentAvg: Math.round(avgRecent), historicAvg: Math.round(avgHistoric) };
+
+        return { sorted, totalMonths, positiveMonths, winRate, neverLost, trend, oddsShift, recentYield, yield6m, maxDrawdown: parseFloat(maxDrawdown.toFixed(1)), maxDDStreak, overbetting };
     }
 
     function buildSpecialization(profitability) {
@@ -330,39 +378,13 @@ javascript: (async () => {
     }
 
     function buildChartHtml(sorted) {
-        // Agrupar por año para los toggles
-        const years = [...new Set(sorted.map(m => m.archive.split(' ')[1]))].sort();
-        const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const COLORS = ['#3b82f6', '#22c55e', '#f97316', '#a855f7', '#ec4899', '#eab308', '#06b6d4', '#ef4444'];
-
-        // Datasets por año
-        const datasets = years.map((year, i) => {
-            const monthMap = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
-            const data = Array(12).fill(null);
-            sorted.filter(m => m.archive.split(' ')[1] === year).forEach(m => {
-                const idx = monthMap[m.archive.split(' ')[0].toLowerCase()];
-                if (idx !== undefined) data[idx] = m.yield;
-            });
-            return {
-                label: year,
-                data,
-                borderColor: COLORS[i % COLORS.length],
-                backgroundColor: COLORS[i % COLORS.length] + '22',
-                tension: 0.3,
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                spanGaps: false,
-                hidden: parseInt(year) < new Date().getFullYear() - 2, // solo últimos 3 años visible por defecto
-            };
-        });
-
         return `
     <div class="ta-section">
       <div class="ta-section-title">📈 Yield mensual por año</div>
       <div style="font-size:10px;color:#7b8199;margin-bottom:8px">
-        Click en el año de la leyenda para mostrar/ocultar · línea punteada = break-even
+        Click en el año de la leyenda para mostrar/ocultar · barras = picks del año actual
       </div>
-      <div style="position:relative;height:220px">
+      <div style="position:relative;height:280px">
         <canvas id="ta-yield-chart"></canvas>
       </div>
     </div>`;
@@ -376,50 +398,110 @@ javascript: (async () => {
         const currentYear = String(new Date().getFullYear());
         const years = [...new Set(sorted.map(m => m.archive.split(' ')[1]))].sort();
         const COLORS = ['#3b82f6', '#22c55e', '#f97316', '#a855f7', '#ec4899', '#eab308', '#06b6d4', '#ef4444'];
+        const monthMap = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
 
-        const datasets = years.map((year, i) => {
-            const monthMap = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+        // ─── Datasets de líneas (yield por año) ──────────────────────────────────
+        const lineDatasets = years.map((year, i) => {
             const data = Array(12).fill(null);
+            const picks = Array(12).fill(0);
             sorted.filter(m => m.archive.split(' ')[1] === year).forEach(m => {
                 const idx = monthMap[m.archive.split(' ')[0].toLowerCase()];
-                if (idx !== undefined) data[idx] = m.yield;
+                if (idx !== undefined) { data[idx] = m.yield; picks[idx] = m.picks; }
             });
+
+            // Media mensual de picks de ESTE año concreto
+            const yearPicks = picks.filter(p => p > 0);
+            const yearMonthlyAvg = yearPicks.length > 0
+                ? yearPicks.reduce((s, p) => s + p, 0) / yearPicks.length
+                : 0;
+            const overbettingThreshold = yearMonthlyAvg * 1.2;
+
             const isCurrentYear = year === currentYear;
+            const lineColor = COLORS[i % COLORS.length];
+
+            // Color de cada punto: rojo si overbetting, color de línea si normal
+            const pointColors = picks.map((p, j) =>
+                data[j] == null ? 'transparent' :
+                    p > overbettingThreshold ? '#ef4444' : lineColor
+            );
+            const radii = picks.map((p, j) =>
+                data[j] == null ? 0 : isCurrentYear ? Math.min(10, Math.max(3, Math.sqrt(p) * 0.6)) : 3
+            );
+
             return {
-                label: year, data,
-                borderColor: COLORS[i % COLORS.length],
+                type: 'line',
+                yAxisID: 'yYield',
+                label: year, data, _picks: picks,
+                borderColor: lineColor,
                 backgroundColor: 'transparent',
-                // ← año actual más grueso, resto fino
-                borderWidth: isCurrentYear ? 3 : 1,
-                pointRadius: isCurrentYear ? 5 : 3,
-                pointHoverRadius: isCurrentYear ? 7 : 5,
+                borderWidth: isCurrentYear ? 2.5 : 1,
                 tension: 0.3, spanGaps: false,
                 hidden: parseInt(year) < new Date().getFullYear() - 2,
+                pointRadius: radii,
+                pointHoverRadius: radii.map(r => r > 0 ? r + 2 : 0),
+                pointBackgroundColor: pointColors,   // ← rojo si overbetting
+                pointBorderColor: pointColors,
+                pointHoverBackgroundColor: pointColors,
+                pointHoverBorderColor: pointColors,
+                _yearMonthlyAvg: yearMonthlyAvg,     // ← para el tooltip
+                order: isCurrentYear ? 0 : 1,
             };
         });
 
-        // ─── Plugin: fondo verde/rojo encima/debajo de y=0 ───────────────────────
+
+        // ─── Dataset de barras (picks año actual) ─────────────────────────────────
+        const currentData = Array(12).fill(null);
+        const currentPicks = Array(12).fill(0);
+        sorted.filter(m => m.archive.split(' ')[1] === currentYear).forEach(m => {
+            const idx = monthMap[m.archive.split(' ')[0].toLowerCase()];
+            if (idx !== undefined) { currentData[idx] = m.yield; currentPicks[idx] = m.picks; }
+        });
+
+        // Media de picks por mes entre TODOS los años
+        const monthlyAvgPicks = Array(12).fill(0).map((_, monthIdx) => {
+            const entries = sorted.filter(m => {
+                const idx = monthMap[m.archive.split(' ')[0].toLowerCase()];
+                return idx === monthIdx && m.picks > 0;
+            });
+            return entries.length > 0
+                ? Math.round(entries.reduce((s, m) => s + m.picks, 0) / entries.length)
+                : 0;
+        });
+
+        const barsDataset = {
+            type: 'bar',
+            yAxisID: 'yPicks',
+            label: 'Picks (media histórica por mes)',
+            data: monthlyAvgPicks,
+            backgroundColor: 'rgba(99,102,241,0.25)',
+            borderColor: 'rgba(99,102,241,0.5)',
+            borderWidth: 1,
+            borderRadius: 3,
+            order: 2,
+        };
+
+
+        // ─── Plugin fondo verde/rojo ──────────────────────────────────────────────
         const greenRedBgPlugin = {
             id: 'greenRedBg',
             beforeDraw(chart) {
-                const { ctx, chartArea: { left, right, top, bottom }, scales: { y } } = chart;
+                const { ctx, chartArea: { left, right, top, bottom }, scales } = chart;
+                const y = scales['yYield'];
                 if (!y) return;
                 const zero = y.getPixelForValue(0);
                 const clampedZero = Math.max(top, Math.min(bottom, zero));
-                // zona verde (por encima del 0)
                 ctx.save();
-                ctx.fillStyle = 'rgba(34,197,94,0.06)';
+                ctx.fillStyle = 'rgba(34,197,94,0.05)';
                 ctx.fillRect(left, top, right - left, clampedZero - top);
-                // zona roja (por debajo del 0)
-                ctx.fillStyle = 'rgba(239,68,68,0.06)';
+                ctx.fillStyle = 'rgba(239,68,68,0.05)';
                 ctx.fillRect(left, clampedZero, right - left, bottom - clampedZero);
                 ctx.restore();
             }
         };
 
         new window.Chart(canvas, {
-            type: 'line',
-            data: { labels: MONTH_SHORT, datasets },
+            type: 'bar',   // tipo base del chart mixto
+            data: { labels: MONTH_SHORT, datasets: [...lineDatasets, barsDataset] },
             plugins: [greenRedBgPlugin],
             options: {
                 responsive: true, maintainAspectRatio: false,
@@ -427,51 +509,86 @@ javascript: (async () => {
                 plugins: {
                     legend: {
                         labels: {
-                            color: '#9ca3b8',
+                            color: '#e8eaf0',        // ← blanco/gris claro, igual que el resto del popup
                             font: { size: 10 },
                             padding: 8,
-                            boxWidth: 14,
-                            boxHeight: 14,
-                            // ← usePointStyle rellena el cuadrado con el color real
-                            usePointStyle: false,
+                            boxWidth: 12,
+                            boxHeight: 12,
                             generateLabels(chart) {
-                                return chart.data.datasets.map((ds, i) => ({
-                                    text: ds.label,
-                                    fillStyle: ds.hidden ? '#2a2d3a' : ds.borderColor,
-                                    strokeStyle: ds.borderColor,
-                                    lineWidth: 2,
-                                    hidden: ds.hidden,
-                                    datasetIndex: i,
-                                    fontColor: ds.hidden ? '#555' : '#9ca3b8',
-                                }));
-                            }
+                                return chart.data.datasets
+                                    .filter(ds => ds.type === 'line')
+                                    .map((ds) => {
+                                        const realIdx = chart.data.datasets.indexOf(ds);
+                                        const meta = chart.getDatasetMeta(realIdx);
+                                        // ← meta.hidden puede ser null en el primer render, hay que combinar con ds.hidden
+                                        const isHidden = meta.hidden ?? ds.hidden ?? false;
+                                        return {
+                                            text: ds.label,
+                                            fillStyle: isHidden ? 'rgba(0,0,0,0)' : ds.borderColor,
+                                            strokeStyle: ds.borderColor,
+                                            lineWidth: 2,
+                                            hidden: isHidden,
+                                            datasetIndex: realIdx,
+                                            fontColor: isHidden ? '#555566' : '#e8eaf0',
+                                        };
+                                    });
+                            },
+
                         },
                         onClick(e, legendItem, legend) {
                             const index = legendItem.datasetIndex;
                             const meta = legend.chart.getDatasetMeta(index);
-                            meta.hidden = !meta.hidden;
-                            legend.chart.data.datasets[index].hidden = meta.hidden;
+                            const ds = legend.chart.data.datasets[index];
+                            // Leer estado actual correcto
+                            const currentlyHidden = meta.hidden ?? ds.hidden ?? false;
+                            meta.hidden = !currentlyHidden;
+                            ds.hidden = !currentlyHidden;
                             legend.chart.update();
                         }
+
                     },
+
                     tooltip: {
                         backgroundColor: '#1e2130', titleColor: '#e8eaf0', bodyColor: '#9ca3b8',
                         callbacks: {
-                            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y + '%' : 'N/A'}`
+                            label: ctx => {
+                                if (ctx.dataset.type === 'bar')
+                                    return ` Media histórica: ${ctx.parsed.y} picks`;
+                                const picks = ctx.dataset._picks?.[ctx.dataIndex] ?? 0;
+                                const avg = ctx.dataset._yearMonthlyAvg ?? 0;
+                                const over = avg > 0 && picks > avg * 1.2;
+                                const yVal = ctx.parsed.y != null ? ctx.parsed.y + '%' : 'N/A';
+                                return ` ${ctx.dataset.label}: ${yVal} (${picks} picks${over ? ' ⚠️ overbetting' : ''})`;
+                            }
+
                         }
                     },
                 },
                 scales: {
-                    x: { ticks: { color: '#7b8199', font: { size: 10 } }, grid: { color: '#1e2130' } },
-                    y: {
+                    x: {
+                        ticks: { color: '#7b8199', font: { size: 10 } },
+                        grid: { color: '#1e2130' }
+                    },
+                    yYield: {
+                        type: 'linear', position: 'left',
                         ticks: { color: '#7b8199', font: { size: 10 }, callback: v => v + '%' },
                         grid: {
-                            color: ctx => ctx.tick.value === 0 ? 'rgba(255,255,255,0.2)' : '#1e2130',
+                            color: ctx => ctx.tick.value === 0 ? 'rgba(255,255,255,0.15)' : '#1e2130',
                             lineWidth: ctx => ctx.tick.value === 0 ? 2 : 1,
                         },
                         afterDataLimits: scale => {
                             scale.min = Math.min(scale.min, -5);
                             scale.max = Math.max(scale.max, 5);
+                        }
+                    },
+                    yPicks: {
+                        type: 'linear', position: 'right',
+                        ticks: { color: '#4a5068', font: { size: 9 } },
+                        grid: { drawOnChartArea: false }, // no superponer grid con el de yield
+                        afterDataLimits: scale => {
+                            // Comprimir barras en la parte inferior — estilo TradingView
+                            scale.max = scale.max * 4;
+                            scale.min = 0;
                         }
                     }
                 }
@@ -580,20 +697,9 @@ javascript: (async () => {
         const lowSample = mR.score < 50;
         const badYield = yR.score < 40;
 
-        // Calcular drawdown máximo (racha negativa consecutiva)
-        let maxDrawdown = 0, currentDD = 0;
-        consistency.sorted.forEach(m => {
-            if (m.yield < 0) { currentDD += m.yield; maxDrawdown = Math.min(maxDrawdown, currentDD); }
-            else currentDD = 0;
-        });
-        const bigDrawdown = maxDrawdown < -40;
+        const bigDrawdown = consistency.maxDrawdown < -40;
+        const isOverbetting = consistency.overbetting.detected;
 
-        // Overbetting: picks/mes reciente vs histórico
-        const recentMonths = consistency.sorted.slice(-3);
-        const historicMonths = consistency.sorted.slice(0, -3);
-        const avgPicksRecent = recentMonths.reduce((s, m) => s + m.picks, 0) / Math.max(recentMonths.length, 1);
-        const avgPicksHistoric = historicMonths.reduce((s, m) => s + m.picks, 0) / Math.max(historicMonths.length, 1);
-        const isOverbetting = avgPicksHistoric > 10 && avgPicksRecent > avgPicksHistoric * 2;
 
         // Construir razones concretas
         const reasons = [];
@@ -602,8 +708,8 @@ javascript: (async () => {
         if (isBajista) reasons.push(`tendencia bajista reciente (${consistency.trend.avgRecent}% vs histórico ${consistency.trend.avgHistoric}%)`);
         if (highLive) reasons.push(`${followability.liveRatio}% de picks son live — muy difícil de replicar`);
         if (lowSeg && !highLive) reasons.push(`picks mayoritariamente en ligas ilíquidas (${Math.round(sR.liquidPicksRatio * 100)}% líquido)`);
-        if (bigDrawdown) reasons.push(`drawdown máximo consecutivo de ${maxDrawdown.toFixed(0)}% — requiere bankroll alto`);
-        if (isOverbetting) reasons.push(`posible overbetting — picks recientes ${avgPicksRecent.toFixed(0)}/mes vs ${avgPicksHistoric.toFixed(0)}/mes histórico`);
+        if (bigDrawdown) reasons.push(`drawdown máximo consecutivo de ${consistency.maxDrawdown.toFixed(0)}% (${consistency.maxDDStreak} meses) — requiere bankroll alto`);
+        if (isOverbetting) reasons.push(`posible overbetting — picks recientes ${consistency.overbetting.recentAvg}/mes vs ${consistency.overbetting.historicAvg}/mes histórico (×${consistency.overbetting.ratio})`);
         if (isShift) reasons.push(`cambio de odds medias reciente (${consistency.oddsShift.historicOdds} → ${consistency.oddsShift.recentOdds}) — posible cambio de estrategia`);
 
         const positives = [];
@@ -616,12 +722,12 @@ javascript: (async () => {
         if (sR.score >= 70) positives.push(`fácil de seguir (${Math.round(sR.liquidPicksRatio * 100)}% picks en mercados líquidos)`);
 
         const reasonHtml = reasons.length
-            ? `<div style="margin-top:8px;font-size:11px;color:#9ca3b8;text-align:left">
+            ? `<div style="margin-top:8px;font-size:11px;color:#9ca3b8;text-align:left; width:50%">
              <b style="color:#f97316">⚠️ Puntos débiles:</b><br>
              ${reasons.map(r => `· ${r}`).join('<br>')}
            </div>` : '';
         const positiveHtml = positives.length
-            ? `<div style="margin-top:6px;font-size:11px;color:#9ca3b8;text-align:left">
+            ? `<div style="margin-top:6px;font-size:11px;color:#9ca3b8;text-align:left; width:50%">
              <b style="color:#22c55e">✅ Puntos fuertes:</b><br>
              ${positives.map(r => `· ${r}`).join('<br>')}
            </div>` : '';
@@ -681,158 +787,298 @@ javascript: (async () => {
     </div>`;
     }
 
-    function renderPopup(td, scores, specialization, consistency, followability, categoryYieldData, followVerdict) {
+    function buildPortfolioHtml(profitability, innerOnly = false) {
+        const cats = [...profitability.categories]
+            .filter(c => c.picks >= 15)
+            .sort((a, b) => b.yield - a.yield || b.picks - a.picks);
+
+        const rows = cats.map(c => {
+            const isSelected = c.yield >= 12;
+            const yieldColor = c.yield >= 20 ? '#22c55e' : c.yield >= 12 ? '#eab308' : c.yield >= 0 ? '#f97316' : '#ef4444';
+            const liq = isLiquid(c.league) ? '💧' : '🔒';
+            return `<tr>
+          <td class="ta-pf-check-cell"><input type="checkbox" class="ta-pf-check" data-picks="${c.picks}" data-yield="${c.yield}" data-wr="${c.wr}" ${isSelected ? 'checked' : ''}></td>
+          <td>${liq} ${c.name}</td>
+          <td style="color:${yieldColor};font-weight:700">${c.yield}%</td>
+          <td style="color:#9ca3b8">${c.wr}%</td>
+          <td style="color:#9ca3b8">${c.picks}</td>
+        </tr>`;
+        }).join('');
+
+        const inner = `
+      <div style="font-size:10px;color:#7b8199;margin-bottom:8px">
+        Selecciona las categorías — el yield combinado se recalcula en tiempo real
+      </div>
+      <div class="ta-pf-summary">
+        <div class="ta-pf-stat"><span class="ta-pf-stat-label">Yield combinado</span><span class="ta-pf-stat-value" id="ta-pf-yield">—</span></div>
+        <div class="ta-pf-stat"><span class="ta-pf-stat-label">Picks/mes est.</span><span class="ta-pf-stat-value" id="ta-pf-picks" style="color:#e8eaf0">—</span></div>
+        <div class="ta-pf-stat"><span class="ta-pf-stat-label">Win rate</span><span class="ta-pf-stat-value" id="ta-pf-wr" style="color:#e8eaf0">—</span></div>
+      </div>
+      <table class="ta-pf-table">
+        <thead><tr><th></th><th>Categoría</th><th>Yield</th><th>WR</th><th>Picks</th></tr></thead>
+        <tbody id="ta-pf-list">${rows}</tbody>
+      </table>`;
+
+        if (innerOnly) return inner;
+        return `<div class="ta-section"><div class="ta-section-title">🎯 Portfolio builder</div>${inner}</div>`;
+    }
+
+
+
+    function initPortfolio(profitability) {
+        const list = document.getElementById('ta-pf-list');
+        if (!list) return;
+
+        function recalc() {
+            const checks = list.querySelectorAll('.ta-pf-check:checked');
+            const yieldEl = document.getElementById('ta-pf-yield');
+            const picksEl = document.getElementById('ta-pf-picks');
+            const wrEl = document.getElementById('ta-pf-wr');
+            if (!yieldEl) return;
+
+            if (checks.length === 0) {
+                yieldEl.textContent = '—'; yieldEl.style.color = '#555566';
+                picksEl.textContent = '— picks/mes'; wrEl.textContent = 'WR —';
+                return;
+            }
+
+            let totalPicks = 0, weightedYield = 0, weightedWr = 0;
+            checks.forEach(ch => {
+                const p = parseFloat(ch.dataset.picks);
+                weightedYield += parseFloat(ch.dataset.yield) * p;
+                weightedWr += parseFloat(ch.dataset.wr) * p;
+                totalPicks += p;
+            });
+
+            const combinedYield = parseFloat((weightedYield / totalPicks).toFixed(1));
+            const combinedWr = parseFloat((weightedWr / totalPicks).toFixed(1));
+            const monthlyEst = Math.round(totalPicks / Math.max(profitability.global.picks, 1)
+                * (profitability.global.picks / 12));
+
+            const yColor = combinedYield >= 20 ? '#22c55e' : combinedYield >= 12 ? '#eab308' : combinedYield >= 0 ? '#f97316' : '#ef4444';
+            yieldEl.textContent = combinedYield + '% yield combinado';
+            yieldEl.style.color = yColor;
+            picksEl.textContent = `~${monthlyEst} picks/mes`;
+            wrEl.textContent = `WR ${combinedWr}%`;
+        }
+
+        list.addEventListener('click', e => {
+            const row = e.target.closest('tr');
+            if (!row || e.target.type === 'checkbox') return;
+            const cb = row.querySelector('.ta-pf-check');
+            if (cb) { cb.checked = !cb.checked; recalc(); }
+        });
+        list.addEventListener('change', recalc);
+        recalc();
+    }
+
+
+
+
+    function renderPopup(td, profitability, scores, specialization, consistency, followability, categoryYieldData, followVerdict) {
         const { muestra: mR, yield: yR, seguibilidad: sR } = scores;
         const prof = { global: { picks: td.header.picks, yield: td.header.yield } };
 
         const byPicksThenYield = (a, b) => b.picks - a.picks || b.yield - a.yield;
-
         const recommended = [...specialization.stars].sort(byPicksThenYield);
         const recommendedIll = [...specialization.starsIlliquid].sort(byPicksThenYield);
-        const watch = [...specialization.watchYield, ...specialization.watchIlliquid]
-            .sort(byPicksThenYield);
+        const watch = [...specialization.watchYield, ...specialization.watchIlliquid].sort(byPicksThenYield);
+        const negatives = [...specialization.negatives].sort(byPicksThenYield);
 
-        // Flags muestra
         const mFlags = [];
         if (td.header.picks < 200) mFlags.push(renderFlag(`Solo ${td.header.picks} picks — se necesitan al menos 200 para conclusiones fiables`));
         if (consistency.totalMonths < 6) mFlags.push(renderFlag(`Solo ${consistency.totalMonths} meses de historial — mínimo recomendado: 6`));
         if (consistency.neverLost) mFlags.push(renderFlag('Nunca ha tenido mes negativo — sin datos de reacción ante drawdown', 'info'));
 
-        // Flags yield
         const yFlags = [];
         if (consistency.trend.status === 'bajista')
-            yFlags.push(renderFlag(`Tendencia bajista: yield reciente ${consistency.trend.avgRecent}% vs histórico ${consistency.trend.avgHistoric}% — el rendimiento está bajando`));
+            yFlags.push(renderFlag(`Tendencia bajista: yield reciente ${consistency.trend.avgRecent}% vs histórico ${consistency.trend.avgHistoric}%`));
         if (consistency.oddsShift?.shifted)
-            yFlags.push(renderFlag(`Cambio de odds del ${((consistency.oddsShift.ratio - 1) * 100).toFixed(0)}% — posible cambio de estrategia o búsqueda de valor en otro mercado`));
+            yFlags.push(renderFlag(`Cambio de odds del ${((consistency.oddsShift.ratio - 1) * 100).toFixed(0)}% — posible cambio de estrategia`));
         if (yR.recentY !== null && yR.globalY - yR.recentY > 15)
-            yFlags.push(renderFlag(`Caída notable: yield global ${yR.globalY}% vs último año ${yR.recentY}% — diferencia de más de 15 puntos`));
+            yFlags.push(renderFlag(`Caída notable: yield global ${yR.globalY}% vs último año ${yR.recentY}%`));
         if (yR.categoryBonus > 0)
             yFlags.push(renderFlag(`Las categorías recomendadas mantienen buen yield reciente (+${yR.categoryBonus} pts)`, 'ok'));
         if (yR.categoryBonus < 0)
             yFlags.push(renderFlag(`El yield reciente de las categorías recomendadas está cayendo (${yR.categoryBonus} pts)`));
+        if (consistency.overbetting.detected)
+            yFlags.push(renderFlag(`Posible overbetting — ${consistency.overbetting.recentAvg} picks/mes recientes vs ${consistency.overbetting.historicAvg}/mes histórico (×${consistency.overbetting.ratio})`, 'warn'));
+        if (consistency.maxDrawdown < -30)
+            yFlags.push(renderFlag(`Drawdown consecutivo de ${consistency.maxDrawdown}% en ${consistency.maxDDStreak} meses`, consistency.maxDrawdown < -50 ? 'warn' : 'info'));
 
-        // Flags seguibilidad
         const sFlags = [];
-        if (sR.liveRatio >= 80)
-            sFlags.push(renderFlag(`${sR.liveRatio}% de picks son live — prácticamente imposible colocarlos a tiempo sin automatización`));
-        else if (sR.liveRatio >= 40)
-            sFlags.push(renderFlag(`${sR.liveRatio}% de picks son live — requiere estar pendiente en tiempo real`));
-        if ((sR.anticipationPct ?? 0) >= 90)
-            sFlags.push(renderFlag(`${sR.anticipationPct}% de picks con menos de 1h de antelación — margen mínimo para colocar la apuesta`));
-        if (sR.liquidPicksRatio >= 0.75)
-            sFlags.push(renderFlag(`${Math.round(sR.liquidPicksRatio * 100)}% de los picks en mercados líquidos — fácil de encontrar en cualquier casa`, 'ok'));
-        else if (sR.liquidPicksRatio < 0.5)
-            sFlags.push(renderFlag(`Solo ${Math.round(sR.liquidPicksRatio * 100)}% en mercados líquidos — muchos picks en ligas difíciles de encontrar`));
-        if (sR.illiquidLeagues?.length > 0)
-            sFlags.push(renderFlag(`Ligas con muestra pero ilíquidas: ${sR.illiquidLeagues.map(c => c.name).join(', ')}`));
+        if (sR.liveRatio >= 80) sFlags.push(renderFlag(`${sR.liveRatio}% de picks son live — prácticamente imposible colocarlos a tiempo`));
+        else if (sR.liveRatio >= 40) sFlags.push(renderFlag(`${sR.liveRatio}% de picks son live — requiere estar pendiente en tiempo real`));
+        if ((sR.anticipationPct ?? 0) >= 90) sFlags.push(renderFlag(`${sR.anticipationPct}% de picks con menos de 1h de antelación`));
+        if (sR.liquidPicksRatio >= 0.75) sFlags.push(renderFlag(`${Math.round(sR.liquidPicksRatio * 100)}% de los picks en mercados líquidos`, 'ok'));
+        else if (sR.liquidPicksRatio < 0.5) sFlags.push(renderFlag(`Solo ${Math.round(sR.liquidPicksRatio * 100)}% en mercados líquidos`));
+        if (sR.illiquidLeagues?.length > 0) sFlags.push(renderFlag(`Ligas ilíquidas con muestra: ${sR.illiquidLeagues.map(c => c.name).join(', ')}`));
 
-        // En renderPopup, sustituye la definición de LEGEND por esta versión colapsable:
-        const LEGEND = `
-            <details style="background:#161922;border:1px solid #2a2d3a;border-radius:10px;padding:10px 14px;">
-            <summary style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#7b8199;cursor:pointer;display:flex;align-items:center;gap:6px;list-style:none;">
-                📖 Leyenda &nbsp;<span style="font-size:10px;font-weight:400;color:#555">(click para expandir)</span>
+        function section(id, emoji, title, badge, content, startOpen = false) {
+            return `<details class="ta-section" ${startOpen ? 'open' : ''}>
+            <summary class="ta-section-title" style="cursor:pointer;list-style:none;user-select:none;display:flex;align-items:center;gap:6px;">
+                <span>${emoji} ${title}</span>
+                ${badge ? `<span style="margin-left:4px">${badge}</span>` : ''}
+                <span class="ta-collapse-arrow" style="margin-left:auto;font-size:10px;color:#555">▾</span>
             </summary>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:11px;margin-top:10px;">
-                <div style="font-weight:700;color:#7b8199;grid-column:1/-1">CATEGORÍAS</div>
-                <div>⭐ <b style="color:#22c55e">Recomendada</b></div><div style="color:#9ca3b8">Yield ≥20% · líquida · muestra ≥50 picks</div>
-                <div>🔥 <b style="color:#f97316">Especialista</b></div><div style="color:#9ca3b8">Yield ≥20% · ilíquida · muestra ≥50 picks</div>
-                <div>🟡 <b style="color:#eab308">A vigilar</b></div><div style="color:#9ca3b8">Yield 12-20% o muestra insuficiente</div>
-                <div>🔒 <b style="color:#ef4444">Ilíquido</b></div><div style="color:#9ca3b8">Yield ≥12% pero mercado difícil de encontrar en casas</div>
-                <div style="font-weight:700;color:#7b8199;grid-column:1/-1;margin-top:4px">CONFIANZA EN EL EDGE</div>
-                <div><b style="color:#22c55e">Alta ≥200</b> · <b style="color:#eab308">Media ≥50</b> · <b style="color:#ef4444">Baja &lt;50</b></div>
-                <div style="color:#9ca3b8">Nº de picks en esa categoría</div>
-                <div style="font-weight:700;color:#7b8199;grid-column:1/-1;margin-top:4px">BADGES 6m / 12m</div>
-                <div><b style="color:#22c55e">≥20%</b> · <b style="color:#eab308">≥12%</b> · <b style="color:#f97316">≥0%</b> · <b style="color:#ef4444">&lt;0%</b></div>
-                <div style="color:#9ca3b8">Yield reciente de esa categoría</div>
-                <div style="font-weight:700;color:#7b8199;grid-column:1/-1;margin-top:4px">SCORES /100</div>
-                <div><b style="color:#22c55e">≥80</b> · <b style="color:#eab308">60-79</b> · <b style="color:#f97316">40-59</b> · <b style="color:#ef4444">&lt;40</b></div>
-                <div style="color:#9ca3b8">Excelente · Bueno · Moderado · Insuficiente</div>
-            </div>
+            <div style="margin-top:10px">${content}</div>
             </details>`;
+        }
 
+
+        // ── Veredicto compacto ────────────────────────────────────────────────────
+        const verdictHtml = `
+    <div class="ta-follow ${followVerdict.decision}" style="display:flex;align-items:flex-start;gap:12px;padding:12px 16px;text-align:left;">
+      <div style="font-size:14px;line-height:1;flex-shrink:0">${followVerdict.emoji}</div>
+      <div style="flex:1;min-width:0">
+        <div class="ta-f-title" style="font-size:13px;margin-bottom:4px">${followVerdict.title}</div>
+        <div class="ta-f-reason" style="font-size:11px">${followVerdict.html}</div>
+      </div>
+    </div>`;
+
+        // ── Categorías — tabla unificada ─────────────────────────────────────────
+        const allCats = profitability.categories
+            .filter(c => c.picks >= 15 && c.yield > 0)
+            .sort((a, b) => b.picks - a.picks)
+            .map(c => {
+                const spec = specialization.classified.find(s => s.name === c.name);
+                return { ...c, _type: spec?.tag ?? 'positive' };
+            });
+
+        // Preselección óptima: añadir en orden picks desc mientras el yield combinado no baje
+        const candidates = allCats.filter(c => c.yield >= 12 && c.picks >= 50);
+        const scored = candidates.map(c => ({ ...c, score: c.yield * Math.sqrt(c.picks) }));
+        const avgScore = scored.reduce((s, c) => s + c.score, 0) / Math.max(scored.length, 1);
+        const preselected = new Set(
+            scored
+                .filter(c => c.score >= avgScore)
+                .map(c => c.name)
+        );
+
+
+        function catBadge(type) {
+            return type === 'star' ? '⭐ Líquida'
+                : type === 'star_illiquid' ? '🔥 Ilíquida'
+                    : type === 'watch_yield' ? '🟡 A vigilar'
+                        : type === 'watch_illiquid' ? '🔒 Ilíquida'
+                            : type === 'positive' ? '✅ Positiva'
+                                : '—';
+        }
+        function catBadgeColor(type) {
+            return type === 'star' ? '#22c55e'
+                : type === 'star_illiquid' ? '#f97316'
+                    : (type === 'watch_yield' || type === 'watch_illiquid') ? '#eab308'
+                        : type === 'positive' ? '#6b7280'
+                            : '#555566';
+        }
+
+        const hasCatYield = categoryYieldData?.length > 0;
+        const catsRowsHtml = allCats.map(c => {
+            const recent = categoryYieldData?.find(r => r.name === c.name);
+            const isSelected = preselected.has(c.name);
+            const yc = c.yield >= 20 ? '#22c55e' : c.yield >= 12 ? '#eab308' : c.yield >= 0 ? '#f97316' : '#ef4444';
+            const r12c = recent?.recentYield != null ? (recent.recentYield >= 20 ? '#22c55e' : recent.recentYield >= 12 ? '#eab308' : recent.recentYield >= 0 ? '#f97316' : '#ef4444') : '#555';
+            const r6c = recent?.recentYield6 != null ? (recent.recentYield6 >= 20 ? '#22c55e' : recent.recentYield6 >= 12 ? '#eab308' : recent.recentYield6 >= 0 ? '#f97316' : '#ef4444') : '#555';
+            return `<tr>
+        <td class="ta-pf-check-cell"><input type="checkbox" class="ta-pf-check" data-picks="${c.picks}" data-yield="${c.yield}" data-wr="${c.wr}" ${isSelected ? 'checked' : ''}></td>
+        <td style="color:#e8eaf0;font-weight:600">${c.name}</td>
+        <td><span style="color:${catBadgeColor(c._type)};font-size:10px;white-space:nowrap">${catBadge(c._type)}</span></td>
+        <td style="color:${yc};font-weight:700">${c.yield}%</td>
+        <td style="color:#9ca3b8">${c.wr}%</td>
+        <td style="color:#9ca3b8">${c.picks}</td>
+        ${hasCatYield ? `<td style="color:${r12c}">${recent?.recentYield != null ? recent.recentYield + '%' : '—'}</td><td style="color:${r6c}">${recent?.recentYield6 != null ? recent.recentYield6 + '%' : '—'}</td>` : ''}
+    </tr>`;
+        }).join('');
+
+
+
+        const catsTableContent = allCats.length === 0
+            ? '<div style="font-size:11px;color:#555;text-align:center;padding:8px">Sin categorías con muestra suficiente</div>'
+            : `<table class="ta-pf-table">
+            <thead><tr>
+            <th></th><th>Categoría</th><th>Tipo</th><th>Yield</th><th>WR</th><th>Picks</th>
+            ${hasCatYield ? '<th>12m</th><th>6m</th>' : ''}
+            </tr></thead>
+            <tbody id="ta-pf-list">${catsRowsHtml}</tbody>
+        </table>`;
 
         return `
-  <div id="ta-overlay">
-    <div id="ta-popup">
-      <div id="ta-header">
-        <div>
-          <h1>📊 Análisis: ${td.header.username}</h1>
-          <div class="ta-sub">${td.header.picks} picks · ${consistency.totalMonths} meses · Yield global ${td.header.yield}%</div>
-        </div>
-        <button id="ta-close">✕</button>
-      </div>
-      <div id="ta-body">
-        <div class="ta-scores">
-          ${renderScoreCard('Muestra', mR.score, mR.desc)}
-          ${renderScoreCard('Rendimiento', yR.score, yR.desc)}
-          ${renderScoreCard('Seguibilidad', sR.score, sR.desc)}
-        </div>
-        ${LEGEND}
-        <div class="ta-section">
-          <div class="ta-section-title">🔬 Muestra · ${mR.score}/100</div>
-          ${renderRow('Total picks', td.header.picks, td.header.picks >= 200 ? 'green' : 'yellow')}
-          ${renderRow('Meses de historial', consistency.totalMonths, consistency.totalMonths >= 12 ? 'green' : 'yellow')}
-          ${renderRow('Meses en positivo', `${consistency.positiveMonths}/${consistency.totalMonths} (${consistency.winRate}%)`, consistency.winRate >= 80 ? 'green' : consistency.winRate >= 60 ? 'yellow' : 'red')}
-          ${renderRow('Ligas con muestra fiable (≥15 picks)', `${prof.global.picks >= 15 ? specialization.classified.filter(c => c.reliable).length : 0}`)}
-          ${mFlags.length ? `<div class="ta-flags">${mFlags.join('')}</div>` : ''}
-        </div>
+        <div id="ta-overlay">
+            <div id="ta-popup">
+                <div id="ta-header">
+                    <div>
+                    <h1>📊 Análisis: ${td.header.username}</h1>
+                    <div class="ta-sub">${td.header.picks} picks · ${consistency.totalMonths} meses · Yield global ${td.header.yield}%</div>
+                    </div>
+                    <button id="ta-close">✕</button>
+                </div>
+                <div id="ta-body">
 
-        <div class="ta-section">
-          <div class="ta-section-title">💰 Rendimiento · ${yR.score}/100</div>
-          ${renderRow('Yield global', `${yR.globalY}%`, yR.globalY >= 20 ? 'green' : yR.globalY >= 12 ? 'yellow' : 'red')}
-          ${renderRow('Yield último año (ponderado)', yR.recentY != null ? `${yR.recentY}%` : 'N/A', (yR.recentY ?? 0) >= 20 ? 'green' : (yR.recentY ?? 0) >= 12 ? 'yellow' : 'red')}
-          ${renderRow('Tendencia (últimos 3 meses)', `${consistency.trend.status} (${consistency.trend.avgRecent}% vs ${consistency.trend.avgHistoric}%)`,
-            consistency.trend.status === 'mejorando' ? 'green' : consistency.trend.status === 'bajista' ? 'red' : 'yellow')}
-          ${renderRow('Cambio en odds medias', consistency.oddsShift?.shifted ? `${consistency.oddsShift.historicOdds} → ${consistency.oddsShift.recentOdds} ⚠️` : 'Estable', consistency.oddsShift?.shifted ? 'yellow' : '')}
-            ${renderRow(
-                'Categorías líquidas y rentables',
-                yR.followable.length === 0
-                    ? 'Ninguna'
-                    : `${yR.followable.length}: ${yR.followable.map(c => `${c.name} (${c.yield}%)`).join(', ')}`,
-                yR.followable.length >= 2 ? 'green' : yR.followable.length === 1 ? 'yellow' : 'red'
-            )}          ${yFlags.length ? `<div class="ta-flags">${yFlags.join('')}</div>` : ''}
-        </div>
+        ${verdictHtml}
 
-        <div class="ta-section">
-          <div class="ta-section-title">👁️ Seguibilidad · ${sR.score}/100</div>
+        ${section('muestra', '🔬', 'Muestra', `${mR.score}/100`, `
+        ${renderRow('Meses en positivo', `${consistency.positiveMonths}/${consistency.totalMonths} (${consistency.winRate}%)`, consistency.winRate >= 80 ? 'green' : consistency.winRate >= 60 ? 'yellow' : 'red')}
+        ${renderRow('Ligas con muestra fiable (≥15 picks)', specialization.classified.filter(c => c.reliable).length)}
+        ${mFlags.length ? `<div class="ta-flags">${mFlags.join('')}</div>` : ''}`)}
+
+
+        ${section('trend', '💰', 'Rendimiento', `${yR.score}/100`, `
+        <div class="ta-row">
+            <span class="ta-rl">Yield</span>
+            <span style="display:flex;gap:14px;font-size:12px;font-weight:600">
+            <span title="All-time">
+                <span style="color:#7b8199;font-size:10px">ALL </span>
+                <span class="${yR.globalY >= 20 ? 'green' : yR.globalY >= 12 ? 'yellow' : 'red'} ta-rv">${yR.globalY}%</span>
+            </span>
+            <span title="Último año">
+                <span style="color:#7b8199;font-size:10px">12M </span>
+                <span class="${(yR.recentY ?? 0) >= 20 ? 'green' : (yR.recentY ?? 0) >= 12 ? 'yellow' : 'red'} ta-rv">${yR.recentY != null ? yR.recentY + '%' : '—'}</span>
+            </span>
+            <span title="Últimos 6 meses">
+                <span style="color:#7b8199;font-size:10px">6M </span>
+                <span class="${(consistency.yield6m ?? 0) >= 20 ? 'green' : (consistency.yield6m ?? 0) >= 12 ? 'yellow' : 'red'} ta-rv">${consistency.yield6m != null ? consistency.yield6m + '%' : '—'}</span>
+            </span>
+            <span title="Últimos 3 meses">
+                <span style="color:#7b8199;font-size:10px">3M </span>
+                <span class="${consistency.trend.avgRecent >= 20 ? 'green' : consistency.trend.avgRecent >= 12 ? 'yellow' : consistency.trend.avgRecent >= 0 ? 'orange' : 'red'} ta-rv">${consistency.trend.avgRecent}%</span>
+            </span>
+            </span>
+        </div>
+        ${renderRow('Tendencia', `${consistency.trend.status} (${consistency.trend.avgRecent}% vs ${consistency.trend.avgHistoric}%)`, consistency.trend.status === 'mejorando' ? 'green' : consistency.trend.status === 'bajista' ? 'red' : 'yellow')}
+        ${renderRow('Cambio en odds medias', consistency.oddsShift?.shifted ? `${consistency.oddsShift.historicOdds} → ${consistency.oddsShift.recentOdds} ⚠️` : 'Estable', consistency.oddsShift?.shifted ? 'yellow' : '')}
+        ${renderRow('Drawdown máx. consecutivo', `${consistency.maxDrawdown}% (${consistency.maxDDStreak} ${consistency.maxDDStreak === 1 ? 'mes' : 'meses'})`, consistency.maxDrawdown < -40 ? 'red' : consistency.maxDrawdown < -20 ? 'yellow' : 'green')}
+        ${renderRow('Picks recientes vs histórico', `${consistency.overbetting.recentAvg}/mes vs ${consistency.overbetting.historicAvg}/mes${consistency.overbetting.detected ? ' ⚠️' : ''}`, consistency.overbetting.detected ? 'yellow' : 'green')}
+        ${yFlags.length ? `<div class="ta-flags">${yFlags.join('')}</div>` : ''}`)}
+
+        ${section('seg', '👁️', 'Seguibilidad', `${sR.score}/100`, `
           ${renderRow('% picks live', `${sR.liveRatio}%`, sR.liveRatio >= 80 ? 'red' : sR.liveRatio >= 40 ? 'yellow' : 'green')}
-          ${renderRow('% picks con <1h de antelación', sR.anticipationPct != null ? `${sR.anticipationPct}%` : 'N/A', (sR.anticipationPct ?? 0) >= 90 ? 'red' : (sR.anticipationPct ?? 0) >= 70 ? 'yellow' : 'green')}
+          ${renderRow('% picks con <1h antelación', sR.anticipationPct != null ? `${sR.anticipationPct}%` : 'N/A', (sR.anticipationPct ?? 0) >= 90 ? 'red' : (sR.anticipationPct ?? 0) >= 70 ? 'yellow' : 'green')}
           ${renderRow('% picks en mercados líquidos', `${Math.round(sR.liquidPicksRatio * 100)}%`, sR.liquidPicksRatio >= 0.75 ? 'green' : sR.liquidPicksRatio >= 0.5 ? 'yellow' : 'red')}
           ${followability.peakHour ? renderRow('Hora pico de actividad', `${followability.peakHour.hour_of_the_day} (${followability.peakHour.picks} picks · yield ${followability.peakHour.yield}%)`) : ''}
           ${followability.stakes?.[0] ? renderRow('Stake habitual', followability.stakes[0].stakes) : ''}
-          ${sFlags.length ? `<div class="ta-flags">${sFlags.join('')}</div>` : ''}
+          ${sFlags.length ? `<div class="ta-flags">${sFlags.join('')}</div>` : ''}`)}
+
+        ${section('cats', '🏅', 'Categorías', '', `
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px;">
+            <span style="background:#1a2e1a;border:1px solid #22c55e;color:#22c55e;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px">COMBINACIÓN RECOMENDADA</span>
+            <span style="display:inline-flex;gap:12px;align-items:baseline">
+            <span id="ta-pf-yield" style="font-size:12px;font-weight:800;color:#22c55e">—</span>
+            <span id="ta-pf-picks" style="font-size:10px;color:#7b8199">— picks/mes</span>
+            <span id="ta-pf-wr"    style="font-size:10px;color:#7b8199">WR —</span>
+            </span>
         </div>
+        ${catsTableContent}`)}
 
-        ${recommended.length > 0 ? `
-        <div class="ta-section">
-          <div class="ta-section-title">⭐ Categorías recomendadas <span style="color:#7b8199;font-size:10px;margin-left:4px">(yield ≥20% · mercado líquido)</span></div>
-          <div class="ta-cats">${recommended.map(c => renderCat(c, 'star', categoryYieldData)).join('')}</div>
-        </div>`: ''}
 
-        ${recommendedIll.length > 0 ? `
-        <div class="ta-section">
-        <div class="ta-section-title">🔥 Especialista (ilíquido) <span style="color:#7b8199;font-size:10px;margin-left:4px">(yield ≥20% · mercado difícil de seguir)</span></div>
-        <div class="ta-cats">${recommendedIll.map(c => renderCat(c, 'lock', categoryYieldData)).join('')}</div>
-        </div>` : ''}
-
-        ${watch.length > 0 ? `
-        <div class="ta-section">
-          <div class="ta-section-title">🟡 A vigilar <span style="color:#7b8199;font-size:10px;margin-left:4px">(yield 12-20% o mercado ilíquido)</span></div>
-          <div class="ta-cats">${watch.map(c => renderCat(c, c.tag === 'watch_illiquid' ? 'lock' : 'watch', categoryYieldData)).join('')}</div>
-        </div>`: ''}
-
-        ${buildChartHtml(consistency.sorted)}
-
-        <div class="ta-follow ${followVerdict.decision}">
-          <div class="ta-f-emoji">${followVerdict.emoji}</div>
-          <div class="ta-f-title">${followVerdict.title}</div>
-          <div class="ta-f-reason">${followVerdict.html}</div>
-        </div>
+        ${section('chart', '📈', 'Yield mensual por año', '', `
+          <div style="font-size:10px;color:#7b8199;margin-bottom:8px">Click en el año de la leyenda para mostrar/ocultar · barras = picks históricos</div>
+          <div style="position:relative;height:280px"><canvas id="ta-yield-chart"></canvas></div>`)}
 
       </div>
     </div>
   </div>`;
     }
+
 
     // ─── MAIN ─────────────────────────────────────────────────────────────────────
     // Inject styles + loading screen
@@ -885,17 +1131,17 @@ javascript: (async () => {
         });
 
         const scores = computeScores(profitability, consistency, specialization, followability, categoryYieldData);
-        const followVerdict = getFollowVerdict(scores, specialization, consistency, categoryYieldData);
+        const followVerdict = getFollowVerdict(scores, specialization, consistency, followability, categoryYieldData);
 
         // Replace loading with real popup
         document.getElementById('ta-overlay')?.remove();
         document.body.insertAdjacentHTML('beforeend',
-            renderPopup(td, scores, specialization, consistency, followability, categoryYieldData, followVerdict)
+            renderPopup(td, profitability, scores, specialization, consistency, followability, categoryYieldData, followVerdict)
         );
 
         await loadChartJs();
-        initChart(consistency.sorted);
-
+        requestAnimationFrame(() => initChart(consistency.sorted));
+        initPortfolio(profitability);
         document.getElementById('ta-close').addEventListener('click', () => {
             document.getElementById('ta-overlay')?.remove(); style.remove();
         });
